@@ -26,8 +26,7 @@ const DashboardPage = async () => {
           <CardHeader>
             <CardTitle>No Notes Found</CardTitle>
             <CardDescription>
-              You don't have any notes yet. Click the button above to add a new
-              note.
+              No notes yet. Click the button above to add a new note.
             </CardDescription>
           </CardHeader>
         </Card>
@@ -43,7 +42,8 @@ const DashboardPage = async () => {
               </CardContent>
               <CardFooter>
                 <p className="text-sm text-gray-500">
-                  {new Date(note.createdAt).toLocaleDateString()}
+                  {note.createdAt &&
+                    new Date(note.createdAt).toLocaleDateString()}
                 </p>
               </CardFooter>
             </Card>

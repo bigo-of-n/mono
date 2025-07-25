@@ -3,21 +3,23 @@ import { NextResponse } from "next/server";
 
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   const body = await request.json();
   const { title, content } = body;
 
-  const updatedNote = await updateNote(params.id, title, content);
+  const updatedNote = await updateNote(id, title, content);
 
   return NextResponse.json(updatedNote);
 }
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  await deleteNote(params.id);
+  const { id } = await params;
+  await deleteNote(id);
 
   return new NextResponse(null, { status: 204 });
 }
