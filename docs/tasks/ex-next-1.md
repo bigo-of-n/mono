@@ -1,35 +1,32 @@
-# Nextjs App
+# Next.js App
 
-Standalone nextjs project uses typescript, tailwindcss and shadcn.
+This task involves building a standalone Next.js project using TypeScript, Tailwind CSS, and Shadcn.
 
-## Shadcn installation
+## Shadcn Installation
 
-Use instruction at https://ui.shadcn.com/docs/installation/next
+Follow the instructions at [https://ui.shadcn.com/docs/installation/next](https://ui.shadcn.com/docs/installation/next) to install and configure Shadcn.
 
 ## UI Theme
 
-App Branding: MyNextNotes
-
-1. Primary color - red-400
-2. Accent color - blue-600
-3. Neutral color - gray
-4. Text color - black
+-   **App Branding**: MyNextNotes
+-   **Primary Color**: `red-400`
+-   **Accent Color**: `blue-600`
+-   **Neutral Color**: `gray`
+-   **Text Color**: `black`
 
 ## App Design
 
-1. Use atomic design to create a design system.
+-   Use **atomic design** principles to create a scalable and maintainable design system.
 
-## General page layout
+## General Page Layout
 
-1. Use a grid layout with a header, main content area, and footer.
-1.1 Large dark footer. With Copyright information.
-2. Implement responsive design for mobile and desktop views.
-3. Implement accessibility features such as keyboard navigation and screen reader support.
-4. Implement a loading state for asynchronous data fetching.
-5. Implement error handling for failed data fetching.
-6. No dark mode.
+-   Implement a grid layout with a header, main content area, and a large, dark footer with copyright information.
+-   Ensure responsive design for both mobile and desktop views.
+-   Incorporate accessibility features, including keyboard navigation and screen reader support.
+-   Implement a loading state for asynchronous data fetching and error handling for failed requests.
+-   **Dark mode is not required.**
 
 ### Home Page
 
-1. Hero Section - Introduction to the app and its features.
-2. Features Section - List of key features with icons and descriptions.
+-   **Hero Section**: Introduce the app and its features.
+-   **Features Section**: Display a list of key features with corresponding icons and descriptions.
