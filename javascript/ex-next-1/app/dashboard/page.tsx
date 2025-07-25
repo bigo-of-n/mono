@@ -1,5 +1,4 @@
-"use client";
-
+import { getAllNotes } from "@/lib/db/dal";
 import React from "react";
 import {
   Card,
@@ -11,28 +10,10 @@ import {
 } from "@/components/ui/card";
 import AddNoteModal from "@/components/dashboard/AddNoteModal";
 import { Wrapper } from "@/components/atoms/wrapper";
-import { Button } from "@/components/ui/button";
-import { deleteNote } from "../actions";
-import { getAllNotes } from "@/lib/db/dal";
+import { DeleteNoteButton } from "@/components/dashboard/DeleteNoteButton";
 
-const DashboardPage = () => {
-  const [allNotes, setAllNotes] = React.useState<any[]>([]);
-
-  React.useEffect(() => {
-    const fetchNotes = async () => {
-      const notes = await getAllNotes();
-      setAllNotes(notes);
-    };
-    fetchNotes();
-  }, []);
-
-  const handleDelete = async (id: number) => {
-    if (window.confirm("Are you sure you want to delete this note?")) {
-      await deleteNote(id);
-      const newNotes = allNotes.filter((note) => note.id !== id);
-      setAllNotes(newNotes);
-    }
-  };
+const DashboardPage = async () => {
+  const allNotes = await getAllNotes();
 
   return (
     <Wrapper>
@@ -66,15 +47,7 @@ const DashboardPage = () => {
                       {note.createdAt &&
                         new Date(note.createdAt).toLocaleDateString()}
                     </p>
-                    <Button
-                      variant="destructive"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleDelete(note.id);
-                      }}
-                    >
-                      Delete
-                    </Button>
+                    <DeleteNoteButton noteId={note.id} />
                   </CardFooter>
                 </Card>
               </a>

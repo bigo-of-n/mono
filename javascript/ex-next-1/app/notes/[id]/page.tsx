@@ -1,8 +1,8 @@
+import { getNoteById } from "@/lib/db/dal";
 import { Wrapper } from "@/components/atoms/wrapper";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { getNoteById } from "@/lib/db/dal";
 
 const NotePage = async ({ params }: { params: { id: string } }) => {
   const note = await getNoteById(parseInt(params.id, 10));
