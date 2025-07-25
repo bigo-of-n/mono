@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { Button } from "../ui/button";
 
 const Hero = () => {
   return (
@@ -7,6 +8,7 @@ const Hero = () => {
       <p className="mt-4 text-lg">
         The best place to store and organize your notes.
       </p>
+      <Button>Get started</Button>
     </section>
   );
 };
