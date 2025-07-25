@@ -1,5 +1,5 @@
-import { Rabbit } from 'lucide-react';
-import React from 'react';
+import { Rabbit } from "lucide-react";
+import React from "react";
 
 const Header = () => {
   return (

@@ -10,12 +10,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import AddNoteModal from "@/components/dashboard/AddNoteModal";
+import { Wrapper } from "@/components/atoms/wrapper";
 
 const DashboardPage = async () => {
   const allNotes = await db.select().from(notes);
 
   return (
-    <div className="p-4">
+    <Wrapper>
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <AddNoteModal />
@@ -49,7 +50,7 @@ const DashboardPage = async () => {
           ))}
         </div>
       )}
-    </div>
+    </Wrapper>
   );
 };
 

@@ -13,8 +13,6 @@
 10. Create a model for notes.
 11. Create Notes type using the schema.
 
-
-
 .env file to store configuration variables.
 
 ### Notes JSON
