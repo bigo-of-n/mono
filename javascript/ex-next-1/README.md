@@ -33,3 +33,7 @@ To view the data in the database, you can use the Drizzle Kit studio. Run the fo
 ```bash
 pnpm db:studio
 ```
+
+## Coding Practices
+
+This project follows the best practice of separating the database logic from the API routes. The database queries are handled by a Data Access Layer (DAL) located in `lib/db/dal`. This makes the code more modular, easier to test, and more maintainable.
