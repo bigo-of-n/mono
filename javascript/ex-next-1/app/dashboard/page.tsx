@@ -1,5 +1,5 @@
-import { db } from "@/lib/db";
-import { notes } from "@/lib/db/schema";
+"use client";
+
 import React from "react";
 import {
   Card,
@@ -11,13 +11,32 @@ import {
 } from "@/components/ui/card";
 import AddNoteModal from "@/components/dashboard/AddNoteModal";
 import { Wrapper } from "@/components/atoms/wrapper";
+import { Button } from "@/components/ui/button";
+import { deleteNote } from "../actions";
+import { getAllNotes } from "@/lib/db/dal";
 
-const DashboardPage = async () => {
-  const allNotes = await db.select().from(notes);
+const DashboardPage = () => {
+  const [allNotes, setAllNotes] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    const fetchNotes = async () => {
+      const notes = await getAllNotes();
+      setAllNotes(notes);
+    };
+    fetchNotes();
+  }, []);
+
+  const handleDelete = async (id: number) => {
+    if (window.confirm("Are you sure you want to delete this note?")) {
+      await deleteNote(id);
+      const newNotes = allNotes.filter((note) => note.id !== id);
+      setAllNotes(newNotes);
+    }
+  };
 
   return (
     <Wrapper>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-4 mt-6">
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <AddNoteModal />
       </div>
@@ -33,20 +52,33 @@ const DashboardPage = async () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {allNotes.map((note) => (
-            <Card key={note.id}>
-              <CardHeader>
-                <CardTitle>{note.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p>{note.content}</p>
-              </CardContent>
-              <CardFooter>
-                <p className="text-sm text-gray-500">
-                  {note.createdAt &&
-                    new Date(note.createdAt).toLocaleDateString()}
-                </p>
-              </CardFooter>
-            </Card>
+            <div key={note.id}>
+              <a href={`/notes/${note.id}`}>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{note.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>{note.content}</p>
+                  </CardContent>
+                  <CardFooter className="flex justify-between">
+                    <p className="text-sm text-gray-500">
+                      {note.createdAt &&
+                        new Date(note.createdAt).toLocaleDateString()}
+                    </p>
+                    <Button
+                      variant="destructive"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleDelete(note.id);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </a>
+            </div>
           ))}
         </div>
       )}
