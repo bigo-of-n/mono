@@ -1,6 +1,4 @@
-import { db } from "@/lib/db";
-import { notes } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
+import { deleteNote, updateNote } from "@/lib/db/dal/notes";
 import { NextResponse } from "next/server";
 
 export async function PUT(
@@ -10,15 +8,7 @@ export async function PUT(
   const body = await request.json();
   const { title, content } = body;
 
-  const updatedNote = await db
-    .update(notes)
-    .set({
-      title,
-      content,
-      updatedAt: new Date().toISOString(),
-    })
-    .where(eq(notes.id, params.id))
-    .returning();
+  const updatedNote = await updateNote(params.id, title, content);
 
   return NextResponse.json(updatedNote);
 }
@@ -27,7 +17,7 @@ export async function DELETE(
   request: Request,
   { params }: { params: { id: string } }
 ) {
-  await db.delete(notes).where(eq(notes.id, params.id));
+  await deleteNote(params.id);
 
   return new NextResponse(null, { status: 204 });
 }
