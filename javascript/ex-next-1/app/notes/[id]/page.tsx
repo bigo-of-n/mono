@@ -4,8 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
-const NotePage = async ({ params }: { params: { id: string } }) => {
-  const note = await getNoteById(parseInt(params.id, 10));
+const NotePage = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
+  const note = await getNoteById(id);
 
   if (!note) {
     return (
