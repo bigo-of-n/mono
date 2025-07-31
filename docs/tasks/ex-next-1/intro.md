@@ -2,6 +2,8 @@
 
 This task involves building a standalone Next.js project using TypeScript, Tailwind CSS, and Shadcn.
 
+Refer to - javascript/ex-next-1/README.md
+
 ## Shadcn Installation
 
 Follow the instructions at [https://ui.shadcn.com/docs/installation/next](https://ui.shadcn.com/docs/installation/next) to install and configure Shadcn.
